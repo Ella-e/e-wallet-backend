@@ -24,7 +24,7 @@ public class AccountController {
     @Resource
     private TransactionService transactionService;
 
-    @PostMapping("/findAccountByAid")
+    @GetMapping("/findAccountByAid")
     public Result<Account> findAccountByAidController(@RequestParam long aid) {
         Account newAccount = accountService.findAccountByAidService(aid);
         if (newAccount != null) {
