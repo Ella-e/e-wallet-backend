@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+###pom.xlm###
+pom.xml
