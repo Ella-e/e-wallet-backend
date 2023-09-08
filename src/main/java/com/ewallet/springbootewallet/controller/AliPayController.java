@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/alipay/")
 @Slf4j
 public class AliPayController {
-
-
     private AliPayService aliPayService;
 
     @Autowired
@@ -25,22 +23,23 @@ public class AliPayController {
 
     @RequestMapping("createWebTrade")
     public void createWebTrade(HttpServletResponse response, @RequestParam String tradeNo, @RequestParam String subject, @RequestParam String totalAmount ) throws Exception{
-        log.info("1");
 //        String tradeNo = "20150320091541010121";
 //        String subject = "iphone11 128G";
 //        String totalAmount = "0.1";
-        String returnUrl =  "http://localhost/api/alipay/webReturnUrl";
+//        String returnUrl =  "http://localhost:8081/api/alipay/webReturnUrl";
+        String returnUrl =  "http://localhost:3000";
         AlipayTradePagePayResponse pagePayResponse;
-        log.info("2");
         try {
             pagePayResponse = aliPayService.createWebTradeForm(subject, tradeNo, totalAmount, returnUrl);
             response.setContentType("text/html;charset=utf-8");
             response.getWriter().write(pagePayResponse.getBody());// 直接将完整的表单html输出到页面
             response.getWriter().flush();
             response.getWriter().close();
+            // return Result.success(pagePayResponse.getBody(), "alipay success");
+
         } catch(Exception e) {
-            log.info(e.getMessage());
             System.out.println("new");
+            // return Result.error("1", "alipay fail");
         }
 
     }
