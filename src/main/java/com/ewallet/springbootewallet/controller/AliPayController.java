@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/alipay/")
 @Slf4j
 public class AliPayController {
-
     private AliPayService aliPayService;
 
     @Autowired

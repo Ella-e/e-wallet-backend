@@ -29,9 +29,6 @@ public class AccountServiceImpl implements AccountService {
             return null;
         }
         Account newAccount = accountDao.save(account);
-        if (newAccount != null) {
-            account.setAccountPassword("");
-        }
         return newAccount;
     }
 

@@ -1,0 +1,41 @@
+server:
+    port: 8081
+
+spring:
+    mail:
+        host: smtp.gmail.com
+        port: 587
+        username: confirmationemailsender101@gmail.com
+        password: ulsejyqnxjwlzpog
+        properties:
+            mail:
+                smtp:
+                    auth: true
+                    starttls:
+                        enable: true
+    thymeleaf:
+        prefix: "classpath:/templates/"
+        suffix: ".html"
+
+
+
+
+    jpa:
+        hibernate:
+            ddl-auto: update
+    datasource:
+        url: jdbc:mysql:///ewallet?useSSL=false&serverTimezone=UTC
+        username: root
+        password: admin
+        driver-class-name: com.mysql.cj.jdbc.Driver
+
+jwt:
+    tokenHeader: Authorization #JWT存储的请求头
+    secret: test-secret #JWT加解密使用的密钥
+    expiration: 604800 #JWT的超期限时间(60*60*24*7)
+    tokenHead: 'Bearer '  #JWT负载中拿到开头
+
+mybatis:
+    mapper-locations:
+        - classpath:mapper/*.xml
+
