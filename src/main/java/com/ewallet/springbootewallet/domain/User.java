@@ -1,40 +1,25 @@
 package com.ewallet.springbootewallet.domain;
 
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Table(name = "user")
-@Entity
-public class User {
+import java.io.Serializable;
+
+@Entity(name = "e_wallet_user")
+@Data
+@NoArgsConstructor
+public class User implements Serializable {
+    private static final long serialVersionUID = 4887904943282174032L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long uid;
-
-    private String uname;
-
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    private String name;
+    private String email;
     private String password;
-
-    public long getUid() {
-        return uid;
-    }
-
-    public void setUid(long uid) {
-        this.uid = uid;
-    }
-
-    public String getUname() {
-        return uname;
-    }
-
-    public void setUname(String uname) {
-        this.uname = uname;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
+    private boolean isEnabled;
 }
