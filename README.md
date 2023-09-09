@@ -195,7 +195,7 @@ Your body should be a JSON object with the following fields:
 ```
 GET /account/findAccountByWid?wid=your wallet id
 ```
-### Get wallets by user id
+### Get wallet by user id
 ```
 GET /account/findAccountByUid?uid=your user id
 ```
@@ -213,11 +213,11 @@ You need to include the token in the header of your request (so you need to firs
 ```
 POST /api/alipay/createWebTrade?tradeNo=your trade number&subject=your subject&totalAmount=your total amount
 ```
-#### Get a Alipay transaction by trade number
+#### Get an Alipay transaction by trade number
 ```
 GET /api/alipay/findWebTradeByTradeNo?tradeNo=your trade number
 ```
-### Transection
+### Transaction
 You need to include the token in the header of your request (so you need to first login to get the token) to access resources that require authentication. Otherwise, you will receive a 401 unauthorized response.
 #### Make a transaction
 ```
@@ -272,3 +272,5 @@ Asynchronous Notification URL: Your Asynchronous Notification URL Here
 
 - **Refund and Query (API Interfaces)**: The refund and query functionalities are provided as API interfaces. You can use these interfaces to initiate refund requests and query payment transaction statuses. However, please note that the actual implementation of these features is pending.
 
+## Database Structure
+![img.png](img.png)
