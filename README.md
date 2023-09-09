@@ -251,3 +251,24 @@ Your body should be a JSON object with the following fields:
     "amount": "your amount"
 }
 ```
+## Alipay API Integration
+
+### Project Overview
+
+The Alipay payment integration in this project is just a small part of the entire application. It primarily involves the integration of the Alipay SDK's API, allowing users to initiate payment requests to the Alipay gateway. It also leverages Alipay's sandbox environment for virtual account transfers. Furthermore, you will need Alipay's public and private keys, personal public and private keys, and support for functionalities such as synchronous/asynchronous notifications, refunds, and queries.
+
+### Key Features
+
+- **Virtual Accounts**: By using virtual accounts within Alipay's sandbox environment, you can simulate payment transactions to ensure the correctness and stability of the payment process.
+
+- **Key Management**: Managing multiple keys is crucial in this integration, including Alipay's public and private keys and personal public and private keys. These keys are used for signing and encrypting transaction data.
+
+- **Synchronous/Asynchronous Notifications**: After a payment is completed, users can receive both synchronous and asynchronous notifications to promptly update order information when payment statuses change. 
+
+You will need to configure the return and notify URLs for synchronous and asynchronous notifications. These URLs should point to the appropriate endpoints in your application for handling Alipay notifications.
+
+Synchronous Notification URL: Your Synchronous Notification URL Here
+Asynchronous Notification URL: Your Asynchronous Notification URL Here
+
+- **Refund and Query (API Interfaces)**: The refund and query functionalities are provided as API interfaces. You can use these interfaces to initiate refund requests and query payment transaction statuses. However, please note that the actual implementation of these features is pending.
+
