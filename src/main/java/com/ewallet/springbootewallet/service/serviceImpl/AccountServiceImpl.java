@@ -10,8 +10,11 @@ import com.ewallet.springbootewallet.repository.UserDao;
 import com.ewallet.springbootewallet.service.AccountService;
 import com.ewallet.springbootewallet.utils.TimeUtil;
 import jakarta.annotation.Resource;
+import jakarta.persistence.NonUniqueResultException;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 @Service
@@ -33,8 +36,9 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public Account findAccountByUidService(Long uid) {
-        return null;
+    public Account findAccountByUidService(Long uid) throws NonUniqueResultException {
+        Account accounts = accountDao.findAccountByUid(uid);
+        return accounts;
     }
 
     @Override

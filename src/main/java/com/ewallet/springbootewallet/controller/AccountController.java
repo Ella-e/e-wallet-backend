@@ -10,6 +10,7 @@ import com.ewallet.springbootewallet.service.AccountService;
 import com.ewallet.springbootewallet.service.TransactionService;
 import com.ewallet.springbootewallet.utils.Result;
 import jakarta.annotation.Resource;
+import jakarta.persistence.NonUniqueResultException;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -31,6 +32,20 @@ public class AccountController {
             return Result.success(newAccount, "find account success");
         } else {
             return Result.error("1", "Account not exist");
+        }
+    }
+
+    @GetMapping("/findAccountByUid")
+    public Result<Account> findAccountByUidController(@RequestParam long uid) {
+        try {
+            Account newAccount = accountService.findAccountByUidService(uid);
+            if (newAccount != null) {
+                return Result.success(newAccount, "find account success");
+            } else {
+                return Result.error("1", "Account not exist");
+            }
+        }catch (NonUniqueResultException e) {
+            return Result.error("2","Has multiple accounts");
         }
     }
 
@@ -67,8 +82,17 @@ public class AccountController {
 
     @PostMapping("/transactionToOne")
     public Result<Transaction> transactionToOneController(@RequestParam Long aid, @RequestParam Long receiverAid, @RequestParam String accountPassword, @RequestParam Double amount) {
-        Transaction transactionRecord = accountService.transferToOneService(aid, receiverAid, accountPassword, amount);
-        Transaction addedTransaction = transactionService.addOneTransactionService((transactionRecord));
-        return Result.success(addedTransaction, "transaction success");
+        try {
+            Transaction transactionRecord = accountService.transferToOneService(aid, receiverAid, accountPassword, amount);
+            Transaction addedTransaction = transactionService.addOneTransactionService((transactionRecord));
+            return Result.success(addedTransaction, "transaction success");
+        } catch (AccountNotFoundException e) {
+            return Result.error("2", "Receiver Account not found");
+        } catch (InsufficientAuthenticationException e) {
+            return Result.error("1", "Incorrect password");
+        } catch (TransactionBadRequest e) {
+            return Result.error("3", "transaction bad request");
+        }
+
     }
 }

@@ -19,4 +19,6 @@ public class HttpResponse {
     protected String path;
     protected String requestMethod;
     protected Map<?, ?> data;
+
+    protected String headers;
 }

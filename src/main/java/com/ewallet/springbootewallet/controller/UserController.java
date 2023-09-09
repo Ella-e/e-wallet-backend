@@ -7,7 +7,10 @@ import com.ewallet.springbootewallet.security.AuthAccess;
 import com.ewallet.springbootewallet.service.EmailService;
 import com.ewallet.springbootewallet.service.UserService;
 import com.ewallet.springbootewallet.utils.JwtTokenUtils;
+import com.ewallet.springbootewallet.utils.Result;
+import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
@@ -21,8 +24,10 @@ import java.util.Map;
 @RequestMapping("/user")
 public class UserController {
     @Autowired
+    @Resource
     private UserService userService;
     @Autowired
+    @Resource
     private EmailService emailService;
 
     @PostMapping("/register")
@@ -143,19 +148,26 @@ public class UserController {
     }
     @AuthAccess
     @PostMapping("/login")
+//    @GetMapping("/response-entity-builder-with-http-headers")
     public ResponseEntity<HttpResponse> login(@RequestBody User user) {
+//        HttpHeaders responseHeaders = new HttpHeaders();
+//        responseHeaders.set("Access-Control-Allow-Origin", "http://localhost:3000");
+//        responseHeaders.set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+//        responseHeaders.set("Access-Control-Allow-Headers", "Content-Type");
         if (userService.validateUser(user)) {
             String token = JwtTokenUtils.generateToken(user.getEmail(), user.getPassword());
+//            return Result.success(token, "success");
             return ResponseEntity.ok().body (
                     HttpResponse.builder()
                             .timeStamp(LocalDateTime.now().toString())
                             .message("login success")
                             .status(HttpStatus.OK)
                             .statusCode(HttpStatus.OK.value())
-                            .data(Map.of("token", token,"email", user.getEmail()))
+                            .data(Map.of("token", token,"email", user.getEmail(), "id",user.getId())).headers("Access-Control-Allow-Origin: *")
                             .build()
             );
         } else {
+//            return Result.error("1", "fail");
             return ResponseEntity.badRequest().body(
                     HttpResponse.builder()
                             .timeStamp(LocalDateTime.now().toString())

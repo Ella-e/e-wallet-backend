@@ -8,6 +8,8 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
+
 public interface AccountDao extends JpaRepository<Account, Long> {
 
     // createAccount can be done by the save function provided by jpa

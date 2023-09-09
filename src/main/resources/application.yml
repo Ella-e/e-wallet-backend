@@ -24,9 +24,9 @@ spring:
         hibernate:
             ddl-auto: update
     datasource:
-        url: jdbc:mysql:///ewallet?useSSL=false&serverTimezone=UTC
+        url: jdbc:mysql:///ewalletAccount?useSSL=false&serverTimezone=UTC
         username: root
-        password: admin
+        password: 1390231mzy
         driver-class-name: com.mysql.cj.jdbc.Driver
 
 jwt:
